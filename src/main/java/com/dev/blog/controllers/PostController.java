@@ -82,4 +82,13 @@ public class PostController {
 
         return ResponseEntity.ok(response);
     }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<PostDto> getPost(@PathVariable UUID id) {
+        Post post = postService.getPost(id);
+
+        PostDto response = postMapper.toDto(post);
+
+        return ResponseEntity.ok(response);
+    }
 }
