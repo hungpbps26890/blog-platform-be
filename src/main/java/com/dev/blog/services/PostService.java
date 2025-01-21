@@ -1,6 +1,7 @@
 package com.dev.blog.services;
 
 import com.dev.blog.domain.dtos.CreatePostRequest;
+import com.dev.blog.domain.dtos.UpdatePostRequest;
 import com.dev.blog.domain.entities.Post;
 import com.dev.blog.domain.entities.User;
 
@@ -14,4 +15,6 @@ public interface PostService {
     List<Post> listDrafts(User user);
 
     Post createPost(User user, CreatePostRequest request);
+
+    Post updatePost(UUID id, UpdatePostRequest request);
 }

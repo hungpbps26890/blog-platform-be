@@ -1,8 +1,6 @@
 package com.dev.blog.controllers;
 
-import com.dev.blog.domain.dtos.CreatePostRequest;
-import com.dev.blog.domain.dtos.CreatePostRequestDto;
-import com.dev.blog.domain.dtos.PostDto;
+import com.dev.blog.domain.dtos.*;
 import com.dev.blog.domain.entities.Post;
 import com.dev.blog.domain.entities.User;
 import com.dev.blog.mappers.PostMapper;
@@ -69,5 +67,19 @@ public class PostController {
         PostDto response = postMapper.toDto(createdPost);
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<PostDto> updatePost(
+            @PathVariable UUID id,
+            @Valid @RequestBody UpdatePostRequestDto request
+    ) {
+        UpdatePostRequest updatePostRequest = postMapper.toUpdatePostRequest(request);
+
+        Post updatedPost = postService.updatePost(id, updatePostRequest);
+
+        PostDto response = postMapper.toDto(updatedPost);
+
+        return ResponseEntity.ok(response);
     }
 }
