@@ -91,4 +91,11 @@ public class PostController {
 
         return ResponseEntity.ok(response);
     }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deletePost(@PathVariable UUID id) {
+        postService.deletePost(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }
