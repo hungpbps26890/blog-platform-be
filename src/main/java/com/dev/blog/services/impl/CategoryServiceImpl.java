@@ -3,6 +3,7 @@ package com.dev.blog.services.impl;
 import com.dev.blog.domain.entities.Category;
 import com.dev.blog.repositories.CategoryRepository;
 import com.dev.blog.services.CategoryService;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,5 +48,11 @@ public class CategoryServiceImpl implements CategoryService {
         } else {
             throw new IllegalArgumentException("Category not found");
         }
+    }
+
+    @Override
+    public Category getCategoryById(UUID id) {
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Category not found with id " + id));
     }
 }

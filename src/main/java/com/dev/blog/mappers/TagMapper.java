@@ -1,6 +1,6 @@
 package com.dev.blog.mappers;
 
-import com.dev.blog.domain.dtos.TagResponse;
+import com.dev.blog.domain.dtos.TagDto;
 import com.dev.blog.domain.entities.Post;
 import com.dev.blog.domain.entities.Tag;
 import com.dev.blog.domain.enums.PostStatus;
@@ -15,7 +15,7 @@ import java.util.Set;
 public interface TagMapper {
 
     @Mapping(target = "postCount", source = "posts", qualifiedByName = "calculatePostCount")
-    TagResponse toTagResponse(Tag tag);
+    TagDto toDto(Tag tag);
 
     @Named("calculatePostCount")
     default long calculatePostCount(Set<Post> posts) {
